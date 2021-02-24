@@ -1216,10 +1216,9 @@ static int msm8952_wsa_switch_event(struct snd_soc_dapm_widget *w,
 				"%s: wsa switch supply has been disabled.\n",
 				__func__);
 			return ret;
-		}
+	}
 		if (atomic_dec_return(&supply->ref) == 0)
 			ret = regulator_disable(supply->supply);
-			if (ret)
 				dev_err(w->codec->component.card->dev,
 					"%s: Failed to disable wsa switch supply\n",
 					__func__);

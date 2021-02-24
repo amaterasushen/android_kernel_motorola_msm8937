@@ -90,24 +90,24 @@ static long audio_ioctl_shared(struct file *file, unsigned int cmd,
 		if (rc < 0) {
 			pr_err("q6asm_media_format_block_amrwb+ failed...\n");
 			break;
-		}
-		rc = audio_aio_enable(audio);
-		audio->eos_rsp = 0;
-		audio->eos_flag = 0;
-		if (!rc) {
-			audio->enabled = 1;
-		} else {
-			audio->enabled = 0;
-			pr_err("Audio Start procedure failed rc=%d\n", rc);
+}
+	rc = audio_aio_enable(audio);
+	audio->eos_rsp = 0;
+	audio->eos_flag = 0;
+	       if (!rc) {
+		audio->enabled = 1;
+	} else {
+		audio->enabled = 0;
+		pr_err("Audio Start procedure failed rc=%d\n", rc);
 			break;
-		}
-		pr_debug("%s:AUDIO_START sessionid[%d]enable[%d]\n", __func__,
-			audio->ac->session,
+	}
+	pr_debug("%s:AUDIO_START sessionid[%d]enable[%d]\n", __func__,
+		audio->ac->session,
 			audio->enabled);
-		if (audio->stopped == 1)
-			audio->stopped = 0;
+	       if (audio->stopped == 1)
+		audio->stopped = 0;
 			break;
-		}
+}
 	default:
 		pr_err("%s: Unknown ioctl cmd = %d", __func__, cmd);
 		rc = -EINVAL;
